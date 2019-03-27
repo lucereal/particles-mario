@@ -9,8 +9,41 @@ let context;
 let canvas;
 let raf;
 
+let mario
 
+class Mario {
+    constructor(image,context, width, height){
+        this.sprite = new SpriteSheet(image, height, width); //create new spritesheet with width and height size
+        this.context = context;
+        this.sprite.define('mario', 48, 0);
+        this.x = Math.random() * canvas.height;
+        this.y = Math.random() * canvas.width;
+        this.vx = Math.random() * 5;
+        this.vy = Math.random() * 5;
+    }
 
+    draw(posx,posy){
+        
+        this.sprite.drawTile('mario', this.context, posx, posy)
+    }
+
+    update(){
+        
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.y + this.vy > canvas.height ||
+            this.y + this.vy < 0) {
+            this.vy *= -1;
+        }
+        if (this.x + this.vx > canvas.width ||
+            this.x + this.vx < 0) {
+            this.vx *= -1;
+        }
+        this.draw(this.x, this.y);
+    }
+
+}
+let marios = []
 window.onload = function () {
     console.log("window")
     canvas = document.getElementById('tutorial');
@@ -20,14 +53,16 @@ window.onload = function () {
         context = canvas.getContext('2d');
 
         loadImage('./assets/supermarioworldspritesheet.png', function (image) {
-            const sprites = new SpriteSheet(image, 30, 20); //create new spritesheet with width and height size
-            sprites.define('mario', 48, 0); //define sprite with where it is in sheet
-            sprites.draw('mario', context, 0,0)// draw it at place specified
+            // const sprites = new SpriteSheet(image, 30, 20); //create new spritesheet with width and height size
+            // sprites.define('mario', 48, 0); //define sprite with where it is in sheet
+            //sprites.draw('mario', context, 0,0)// draw it at place specified
             
-            for(let i = 0; i< 25; i++){
-                //sprites.draw('mario', context, i * 30, i * 20)
-                sprites.drawTile('mario', context, i, i)
+            mario = new Mario(image, context, 30, 20)
+          
+            for(let i = 0; i< 50; i++){
+                marios.push(new Mario(image, context, 30,20))
             }
+            draw();
         })
 
     }
@@ -50,18 +85,11 @@ let ball = {
 }
 function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height);
-    ball.draw();
-    ball.x += ball.vx;
-    ball.y += ball.vy;
-
-    if (ball.y + ball.vy > canvas.height ||
-        ball.y + ball.vy < 0) {
-        ball.vy = -ball.vy;
+ 
+    for(let i = 0; i<marios.length; i++){
+        marios[i].update()
     }
-    if (ball.x + ball.vx > canvas.width ||
-        ball.x + ball.vx < 0) {
-        ball.vx = -ball.vx;
-    }
+  
     raf = window.requestAnimationFrame(draw);
 
 }
