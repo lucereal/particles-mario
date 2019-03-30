@@ -1,66 +1,44 @@
-import SpriteSheet from './Spritesheet'
- import {loadImage} from './loaders'
+import {loadImage} from './loaders'
+import Character from './Character'
 
 let windowObj = {
-    x: window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth,
-    y: window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight
+    // x: window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth,
+    // y: window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight
+    // x: window.innerWidth,
+    // y:window.innerHeight,
+    x:document.body.clientWidth    ,
+    y:document.body.clientHeight,
 }
 let context;
-let canvas;
+export let canvas;
 let raf;
-
-let mario
-
-class Mario {
-    constructor(image,context, width, height){
-        this.sprite = new SpriteSheet(image, height, width); //create new spritesheet with width and height size
-        this.context = context;
-        this.sprite.define('mario', 48, 0);
-        this.x = Math.random() * canvas.height;
-        this.y = Math.random() * canvas.width;
-        this.vx = Math.random() * 5;
-        this.vy = Math.random() * 5;
-    }
-
-    draw(posx,posy){
-        
-        this.sprite.drawTile('mario', this.context, posx, posy)
-    }
-
-    update(){
-        
-        this.x += this.vx;
-        this.y += this.vy;
-        if (this.y + this.vy > canvas.height ||
-            this.y + this.vy < 0) {
-            this.vy *= -1;
-        }
-        if (this.x + this.vx > canvas.width ||
-            this.x + this.vx < 0) {
-            this.vx *= -1;
-        }
-        this.draw(this.x, this.y);
-    }
-
-}
 let marios = []
+ 
+var background = new Image();
+background.src = "./assets/trianglify.svg";
+
+window.onresize = function() {
+    // canvas.width = window.innerWidth
+    // canvas.height = window.innerHeight
+    canvas.width = document.body.clientWidth
+    canvas.height = document.body.clientHeight
+}
+
 window.onload = function () {
     console.log("window")
-    canvas = document.getElementById('tutorial');
+    canvas = document.getElementById('canvas');
     canvas.height = windowObj.y;
     canvas.width = windowObj.x;
     if (canvas.getContext) {
         context = canvas.getContext('2d');
-
+        background.onload = function(){
+            context.drawImage(background,100,100);   
+        }
         loadImage('./assets/supermarioworldspritesheet.png', function (image) {
-            // const sprites = new SpriteSheet(image, 30, 20); //create new spritesheet with width and height size
-            // sprites.define('mario', 48, 0); //define sprite with where it is in sheet
-            //sprites.draw('mario', context, 0,0)// draw it at place specified
-            
-            mario = new Mario(image, context, 30, 20)
-          
-            for(let i = 0; i< 50; i++){
-                marios.push(new Mario(image, context, 30,20))
+            for(let i = 0; i< 40; i++){
+                let mario = new Character(image, context, 30,20)
+                mario.setVelocity(3,3); 
+                marios.push(mario)
             }
             draw();
         })
@@ -68,24 +46,12 @@ window.onload = function () {
     }
 
 }
-let ball = {
-    x: 100,
-    y: 100,
-    vx: 5,
-    vy: 5,
-    radius: 25,
-    color: 'blue',
-    draw: function () {
-        context.beginPath();
-        context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true)
-        context.closePath();
-        context.fillStyle = this.color;
-        context.fill();
-    }
-}
+
 function draw() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
- 
+    context.fillStyle = '#4F8EC6'
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    //context.clearRect(0, 0, canvas.width, canvas.height);
+    
     for(let i = 0; i<marios.length; i++){
         marios[i].update()
     }

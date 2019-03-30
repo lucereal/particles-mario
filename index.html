@@ -1,25 +1,86 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8"/>
-    <title>Particles</title>
-    <!-- <script type="text/javascript">
-      function draw() {
-        var canvas = document.getElementById('tutorial');
-        if (canvas.getContext) {
-          var ctx = canvas.getContext('2d');
-        }
-      }
-    </script> -->
-    <!-- <style type="text/css">
-      canvas { border: 1px solid black; }
-    </style> -->
-    <link rel="stylesheet" type="text/css" href="style.css">
-  </head>
-  <!-- <body onload="draw();"> -->
-      <body id="thebody">
-    <canvas id="tutorial" width="150" height="150"></canvas>
-        
-    <script src="dist/bundle.js"></script>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <title>Particles</title>
+  <!-- minify -->
+  <link href="https://unpkg.com/nes.css@2.1.0/css/nes.min.css" rel="stylesheet" />
+  <!-- latest -->
+  <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+  <!-- core style only -->
+  <link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
+
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  
+  <div id="wrapper" class="container-fluid py-4" style="position: relative; z-index: 2; padding:0;">
+<div class="container">
+     <!-- page1 -->
+    <div >
+      <div style="height:100vh; " class=" text-center ">
+        <div style="top:40%;  position:relative;">
+          <h1 class="nes-text " style="color:#4f004d;">Mario Particles</h1>
+        </div>
+      </div>
+    </div>
+<!-- page1 -->
+<!-- page2 -->
+    <div >
+      <div style="height:100vh;" class=" text-center ">
+    
+        <div style="top:40%; position:relative;">
+            <section class="nes-container with-title" style="background-color:#4F8EC6;">
+              <h3 class="title" style="background-color:#4F8EC6;">Particles</h3>
+          <p class="nes-text " style="color:#4f004d;">Mario particles</p>
+        </section>
+        </div>
+    
+      </div>
+    </div>
+<!-- /page2 -->
+<!-- page3-->
+    <!-- <div>
+        <div style="height:100vh; " class=" text-center ">
+          <div style="top:40%; position:relative;">
+            <h1 class="nes-text " style="color:#4f004d;">David Lucero</h1>
+          </div>
+        </div>
+      </div> -->
+<!-- /page3-->
+</div>
+  </div>
+  <!-- /wrapper -->
+  <canvas id="canvas" style="position: absolute;z-index:1;top:0;"></canvas>
+
+  <script src="dist/bundle.js"></script>
 </body>
+
 </html>
+
+ <!-- Navbar -->
+ <!-- <div>
+    <ul class="nav justify-content-end">
+      <li class="mr-2">
+        <a id="work" class="nes-btn">Work</a>
+
+      
+      </li>
+      <li>
+        <a id="contact" class="nes-btn">Contact</a>
+    
+      </li>
+
+    </ul>
+  </div>  -->
+  <!-- /Navbar -->

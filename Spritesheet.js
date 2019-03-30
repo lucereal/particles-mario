@@ -7,8 +7,8 @@ export default class SpriteSheet {
     }
     define(name, x, y) {
         const buffer = document.createElement('canvas');
-        buffer.width = this.width;
-        buffer.height = this.height;
+        buffer.width = this.width * 1.5;
+        buffer.height = this.height * 1.5;
         //drawImage(image, sx, sy, swidth, sheight, dx, dy, dwidth, dheight)
         //sx - x-axis coordinate of top left corner of the sub rectangle
         //sy - y-axis coordinate of top left corner of the sub rectangle
@@ -20,7 +20,7 @@ export default class SpriteSheet {
             x, y,
             this.width, this.height,
             0, 0,
-            this.width, this.height);
+            this.width * 1.5 , this.height* 1.5 );
         this.tiles.set(name, buffer);
 
     }
