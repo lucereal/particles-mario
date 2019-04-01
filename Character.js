@@ -68,15 +68,19 @@ export default class Character {
         let name;
         if(this.vx >= 0 && this.vy < 0){
             this.currentSprite = this.rightup
+            
             name = 'mariorightup'
         }else if(this.vx >= 0 && this.vy > 0){
             this.currentSprite = this.rightdown;
+            
             name = "mariorightdown"
         }else if(this.vx < 0 && this.vy < 0){
             this.currentSprite = this.leftup
+   
             name = 'marioleftup'
         }else{
             this.currentSprite = this.leftdown;
+          
             name = 'marioleftdown'
         }
 

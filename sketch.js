@@ -33,7 +33,7 @@ window.onload = function () {
         let promises = [];
         for (let i = 0; i < 25; i++) {
             let m = new Character(context);
-            m.setVelocity(4, 4);
+            m.setVelocity(3,3);
             marios.push(m);
             promises.push(m.createSprites())
         }
