@@ -16,11 +16,15 @@ export default class SpriteSheet {
         //sheight - height of the sub rectangle
         //dx,dy - the coordinates of the top left corner of sub rectangle to place on the screen
         //dwidth, dheight - the size of the sub 
-        buffer.getContext('2d').drawImage(this.image,
+        
+      
+        let context = buffer.getContext('2d');
+        context.drawImage(this.image,
             x, y,
             this.width, this.height,
             0, 0,
             this.width * 1.5 , this.height* 1.5 );
+           
         this.tiles.set(name, buffer);
 
     }

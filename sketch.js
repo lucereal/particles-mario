@@ -1,4 +1,4 @@
-import {loadImage} from './loaders'
+
 import Character from './Character'
 
 let windowObj = {
@@ -6,18 +6,16 @@ let windowObj = {
     // y: window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight
     // x: window.innerWidth,
     // y:window.innerHeight,
-    x:document.body.clientWidth    ,
-    y:document.body.clientHeight,
+    x: document.body.clientWidth,
+    y: document.body.clientHeight,
 }
 let context;
 export let canvas;
 let raf;
 let marios = []
- 
-var background = new Image();
-background.src = "./assets/trianglify.svg";
-
-window.onresize = function() {
+let mario2
+let marioCape;
+window.onresize = function () {
     // canvas.width = window.innerWidth
     // canvas.height = window.innerHeight
     canvas.width = document.body.clientWidth
@@ -31,17 +29,17 @@ window.onload = function () {
     canvas.width = windowObj.x;
     if (canvas.getContext) {
         context = canvas.getContext('2d');
-        background.onload = function(){
-            context.drawImage(background,100,100);   
+
+        let promises = [];
+        for (let i = 0; i < 25; i++) {
+            let m = new Character(context);
+            m.setVelocity(4, 4);
+            marios.push(m);
+            promises.push(m.createSprites())
         }
-        loadImage('./assets/supermarioworldspritesheet.png', function (image) {
-            for(let i = 0; i< 40; i++){
-                let mario = new Character(image, context, 30,20)
-                mario.setVelocity(3,3); 
-                marios.push(mario)
-            }
+        Promise.all(promises).then(function (values) {
             draw();
-        })
+        });
 
     }
 
@@ -51,11 +49,11 @@ function draw() {
     context.fillStyle = '#4F8EC6'
     context.fillRect(0, 0, canvas.width, canvas.height);
     //context.clearRect(0, 0, canvas.width, canvas.height);
-    
-    for(let i = 0; i<marios.length; i++){
+
+    for (let i = 0; i < marios.length; i++) {
         marios[i].update()
     }
-  
+
     raf = window.requestAnimationFrame(draw);
 
 }
