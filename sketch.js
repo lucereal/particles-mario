@@ -46,7 +46,7 @@ window.onload = function () {
 }
 
 function draw() {
-    context.fillStyle = '#4F8EC6'
+    context.fillStyle = '#F8E1B2'
     context.fillRect(0, 0, canvas.width, canvas.height);
     //context.clearRect(0, 0, canvas.width, canvas.height);
 
